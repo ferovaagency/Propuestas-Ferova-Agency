@@ -5,83 +5,63 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="robots" content="noindex,nofollow">
 <meta name="theme-color" content="#13116b">
-<title>ECOBAJATOURS · Admin</title>
+<title>ECOBAJATOURS · Admin de usuarios</title>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.min.js"></script>
 <script src="js/ecoba-config.js"></script>
 <style>
 :root{--navy:#13116b;--ink:#14134c;--yellow:#ffbd00;--soft:#f2f6fc;--line:#dce2ee;--muted:#56617b;--ok:#1f9d55;--bg:#eef1f7}
 *{box-sizing:border-box}
 body{margin:0;font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",Arial,sans-serif;background:var(--bg);color:var(--ink);font-size:14px}
-button,input,select,textarea{font:inherit}
+button,input,select{font:inherit}
 button{cursor:pointer}
-button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible,a:focus-visible{outline:3px solid #ff8500;outline-offset:2px}
+button:focus-visible,input:focus-visible,select:focus-visible,a:focus-visible,tr:focus-visible{outline:3px solid #ff8500;outline-offset:2px}
 .top{background:var(--navy);color:#fff}
-.topin{max-width:1320px;margin:auto;padding:0 20px;min-height:64px;display:flex;align-items:center;gap:18px}
+.topin{max-width:1240px;margin:auto;padding:0 20px;min-height:64px;display:flex;align-items:center;gap:18px}
 .logo{font-weight:900;font-size:19px;letter-spacing:-.3px}.logo b{color:var(--yellow)}.logo small{display:block;font-size:10px;font-weight:700;letter-spacing:1.4px;color:#cdd3ee}
-.tabs{display:flex;gap:4px;margin-left:12px}
-.tabs button{background:none;border:0;color:#dfe3f6;padding:10px 14px;border-radius:8px;font-weight:800;font-size:13px;min-height:44px}
-.tabs button[aria-current=page]{background:#ffffff1f;color:#fff;box-shadow:inset 0 -3px 0 var(--yellow)}
 .who{margin-left:auto;display:flex;align-items:center;gap:12px;font-size:12px;color:#dfe3f6;min-width:0}
-.who span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:240px}
+.who span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:260px}
 .btn{border:0;border-radius:8px;padding:10px 16px;font-weight:800;font-size:13px;min-height:42px;display:inline-flex;align-items:center;gap:8px;justify-content:center}
 .btn-primary{background:var(--yellow);color:#11114f}.btn-primary:hover{filter:brightness(1.05)}
 .btn-ghost{background:transparent;border:1px solid var(--line);color:var(--ink)}.btn-ghost:hover{background:#fff}
 .top .btn-ghost{color:#fff;border-color:#ffffff55}.top .btn-ghost:hover{background:#ffffff14}
-.btn-ok{background:var(--ok);color:#fff}
 .btn[disabled]{opacity:.55;cursor:wait}
-main{max-width:1320px;margin:auto;padding:26px 20px 60px}
+main{max-width:1240px;margin:auto;padding:26px 20px 60px}
 h1{font-size:26px;letter-spacing:-.6px;margin:0 0 4px}
 .sub{color:var(--muted);margin:0 0 20px}
 .card{background:#fff;border:1px solid var(--line);border-radius:14px;box-shadow:0 6px 20px #13116b0a}
-.stats{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:14px;margin-bottom:22px}
+.stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;margin-bottom:22px}
 .stat{padding:18px}.stat strong{display:block;font-size:30px;letter-spacing:-1px;color:var(--navy)}.stat span{color:var(--muted);font-size:12px;font-weight:700}
-.stat.warn strong{color:#a86b00}
 .toolbar{display:flex;flex-wrap:wrap;gap:10px;align-items:flex-end;padding:14px;border-bottom:1px solid var(--line)}
 .toolbar label{display:flex;flex-direction:column;gap:5px;font-size:11px;font-weight:800;color:var(--muted)}
 .toolbar input,.toolbar select{padding:10px;border:1px solid var(--line);border-radius:8px;background:var(--soft);min-height:42px;color:var(--ink)}
-.toolbar .grow{flex:1;min-width:200px}
-.toolbar .grow input{width:100%}
+.toolbar .grow{flex:1;min-width:220px}.toolbar .grow input{width:100%}
 .toolbar .right{margin-left:auto;display:flex;gap:8px}
 .tablewrap{overflow-x:auto}
-table{width:100%;border-collapse:collapse;min-width:880px}
+table{width:100%;border-collapse:collapse;min-width:820px}
 th{text-align:left;font-size:11px;letter-spacing:.6px;text-transform:uppercase;color:var(--muted);padding:12px 14px;background:var(--soft);border-bottom:1px solid var(--line);white-space:nowrap}
 td{padding:12px 14px;border-bottom:1px solid #edf0f6;vertical-align:top}
 tbody tr{cursor:pointer}tbody tr:hover{background:#fafbff}
-tbody tr:focus-visible{outline:3px solid #ff8500;outline-offset:-3px}
-.mono{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:12px}
 .muted{color:var(--muted);font-size:12px}
-.badge{display:inline-block;font-size:11px;font-weight:800;padding:4px 9px;border-radius:999px;white-space:nowrap;background:#fff5d5;color:#6b4e00}
-.badge.confirmed{background:#e7f7ee;color:#0f5132}.badge.cancelled{background:#eef0f4;color:#4b5263}.badge.completed{background:#e3f4fc;color:#005a80}
+.tag{display:inline-block;font-size:11px;font-weight:800;padding:4px 9px;border-radius:999px;white-space:nowrap;background:#eef0f4;color:#4b5263;margin-right:4px}
+.tag.google{background:#e8f0fe;color:#1a56c4}.tag.admin{background:#fff5d5;color:#6b4e00}.tag.warn{background:#ffe9e6;color:#8a1c0c}
 .empty{padding:40px;text-align:center;color:var(--muted)}
 .count{padding:10px 14px;color:var(--muted);font-size:12px}
-.split{display:grid;grid-template-columns:1.4fr 1fr;gap:18px}
-.list{list-style:none;margin:0;padding:0}
-.list li{display:flex;justify-content:space-between;gap:12px;padding:12px 16px;border-bottom:1px solid #edf0f6;cursor:pointer}
-.list li:hover{background:#fafbff}
-.cardhead{padding:16px 16px 6px;display:flex;justify-content:space-between;align-items:center}
-.cardhead h2{font-size:16px;margin:0}
-/* Panel lateral */
 .scrim{position:fixed;inset:0;background:#0b0a3a66;z-index:20}
-.drawer{position:fixed;top:0;right:0;bottom:0;width:min(560px,100%);background:#fff;z-index:21;display:flex;flex-direction:column;box-shadow:-20px 0 50px #0b0a3a33}
+.drawer{position:fixed;top:0;right:0;bottom:0;width:min(480px,100%);background:#fff;z-index:21;display:flex;flex-direction:column;box-shadow:-20px 0 50px #0b0a3a33}
 .drawer header{padding:18px 20px;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;align-items:flex-start;gap:12px}
-.drawer header h2{margin:4px 0 0;font-size:19px}
+.drawer header h2{margin:0 0 6px;font-size:19px}
 .drawer .body{padding:18px 20px;overflow-y:auto;flex:1}
 .drawer footer{padding:14px 20px;border-top:1px solid var(--line);display:flex;gap:10px;justify-content:flex-end;flex-wrap:wrap;align-items:center}
 .close{background:none;border:0;font-size:24px;line-height:1;color:var(--muted);min-width:44px;min-height:44px}
-dl.facts{display:grid;grid-template-columns:140px 1fr;gap:8px 12px;margin:0 0 18px}
-dl.facts dt{color:var(--muted);font-weight:700;font-size:12px}
-dl.facts dd{margin:0;overflow-wrap:anywhere}
+dl.facts{display:grid;grid-template-columns:130px 1fr;gap:8px 12px;margin:0 0 18px}
+dl.facts dt{color:var(--muted);font-weight:700;font-size:12px}dl.facts dd{margin:0;overflow-wrap:anywhere}
 .section-title{font-size:11px;letter-spacing:1px;text-transform:uppercase;font-weight:900;color:var(--navy);margin:18px 0 10px}
-.form{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.form{display:grid;gap:12px}
 .form label{display:flex;flex-direction:column;gap:5px;font-size:12px;font-weight:800;color:var(--muted)}
-.form .wide{grid-column:1/-1}
-.form input,.form select,.form textarea{padding:10px;border:1px solid var(--line);border-radius:8px;background:var(--soft);color:var(--ink);min-height:42px;width:100%}
-.form textarea{min-height:84px;resize:vertical}
-.hint{font-size:11px;color:var(--muted);font-weight:500}
+.form input{padding:10px;border:1px solid var(--line);border-radius:8px;background:var(--soft);color:var(--ink);min-height:42px;width:100%}
+.hint{font-size:12px;color:var(--muted);line-height:1.55;margin:16px 0 0}
 .msg{font-size:13px;margin-right:auto}.msg.ok{color:var(--ok)}.msg.error{color:#b42318}
-/* Login */
 .login{max-width:420px;margin:70px auto;padding:30px}
-.login h1{margin-bottom:6px}
 .login label{display:flex;flex-direction:column;gap:6px;font-size:12px;font-weight:800;color:var(--muted);margin-top:12px}
 .login input{padding:12px;border:1px solid var(--line);border-radius:8px;background:var(--soft);min-height:44px}
 .login .btn{width:100%;margin-top:16px}
@@ -89,9 +69,8 @@ dl.facts dd{margin:0;overflow-wrap:anywhere}
 .or{display:flex;align-items:center;gap:10px;margin:16px 0 0;font-size:12px;color:var(--muted)}.or:before,.or:after{content:"";flex:1;height:1px;background:var(--line)}
 .alert{padding:12px 14px;border-radius:10px;font-size:13px;line-height:1.55;margin-top:14px}
 .alert.error{background:#ffe9e6;color:#8a1c0c}.alert.warn{background:#fff5d5;color:#544000}
-@media(max-width:980px){.stats{grid-template-columns:repeat(2,minmax(0,1fr))}.split{grid-template-columns:1fr}.who span{display:none}}
-@media(max-width:640px){.topin{flex-wrap:wrap;padding:10px 16px;gap:8px}.tabs{order:3;width:100%;margin:0;overflow-x:auto}.who{margin-left:auto}main{padding:20px 16px 50px}.form{grid-template-columns:1fr}dl.facts{grid-template-columns:110px 1fr}.toolbar .right{margin-left:0;width:100%}.toolbar .right .btn{flex:1}}
-@media(prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+@media(max-width:900px){.stats{grid-template-columns:repeat(2,minmax(0,1fr))}.who span{display:none}}
+@media(max-width:640px){.topin{padding:10px 16px}main{padding:20px 16px 50px}dl.facts{grid-template-columns:105px 1fr}.toolbar .right{margin-left:0;width:100%}.toolbar .right .btn{flex:1}}
 </style>
 </head>
 <body>
@@ -102,131 +81,82 @@ dl.facts dd{margin:0;overflow-wrap:anywhere}
 const cfg=window.ECOBA_CONFIG||{};
 const sb=(window.supabase&&cfg.supabaseUrl&&cfg.supabaseKey)?window.supabase.createClient(cfg.supabaseUrl,cfg.supabaseKey,{auth:{flowType:"pkce",persistSession:true,autoRefreshToken:true,detectSessionInUrl:true}}):null;
 const app=document.getElementById("app");
-const STATUS={pending:"Pendiente",confirmed:"Confirmada",completed:"Completada",cancelled:"Cancelada"};
-const VEHICLE={sedan:"Sedán",suburban:"Suburban",van:"Van",shared:"Colectivo"};
 const googleIcon='<svg aria-hidden="true" width="18" height="18" viewBox="0 0 48 48"><path fill="#FFC107" d="M43.6 20.5H42V20H24v8h11.3C33.7 32.7 29.2 36 24 36c-6.6 0-12-5.4-12-12s5.4-12 12-12c3.1 0 5.8 1.2 7.9 3.1l5.7-5.7C34.1 6.1 29.3 4 24 4 12.9 4 4 12.9 4 24s8.9 20 20 20 20-8.9 20-20c0-1.3-.1-2.4-.4-3.5z"/><path fill="#FF3D00" d="M6.3 14.7l6.6 4.8C14.7 15.1 19 12 24 12c3.1 0 5.8 1.2 7.9 3.1l5.7-5.7C34.1 6.1 29.3 4 24 4 16.3 4 9.7 8.3 6.3 14.7z"/><path fill="#4CAF50" d="M24 44c5.2 0 9.9-2 13.4-5.2l-6.2-5.2C29.2 35.1 26.7 36 24 36c-5.2 0-9.6-3.3-11.3-8l-6.5 5C9.5 39.6 16.2 44 24 44z"/><path fill="#1976D2" d="M43.6 20.5H42V20H24v8h11.3c-.8 2.2-2.2 4.2-4.1 5.6l6.2 5.2C37 39.2 44 34 44 24c0-1.3-.1-2.4-.4-3.5z"/></svg>';
 
-let session=null,isAdmin=null,bookings=[],profiles=[],loaded=false,loadError="",tab="reservas",openId=null,openNotes="",notesLoading=false,saving=false,loginMsg="";
-const filters={q:"",status:"active",from:"",to:"",user:""};
+let session=null,isAdmin=null,users=[],loaded=false,loadError="",openId=null,saving=false,loginMsg="";
+const filters={q:"",method:"all"};
 
 function esc(s){return String(s==null?"":s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;")}
-function today(){const d=new Date();return d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0")}
-function addDays(iso,n){const p=iso.split("-").map(Number),d=new Date(p[0],p[1]-1,p[2]+n);return d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0")}
-function fmtDate(d){if(!d)return "—";const p=String(d).split("-").map(Number);return new Date(p[0],p[1]-1,p[2]).toLocaleDateString("es-MX",{weekday:"short",day:"numeric",month:"short",year:"numeric"})}
-function fmtDT(ts){if(!ts)return "";const m=String(ts).match(/^(\d{4})-(\d{2})-(\d{2})[T ](\d{2}):(\d{2})/);if(!m)return esc(ts);return new Date(+m[1],+m[2]-1,+m[3],+m[4],+m[5]).toLocaleString("es-MX",{day:"numeric",month:"short",hour:"numeric",minute:"2-digit"})}
-function fmtCreated(ts){return ts?new Date(ts).toLocaleString("es-MX",{day:"numeric",month:"short",year:"numeric",hour:"numeric",minute:"2-digit"}):"—"}
-function badge(s){return '<span class="badge '+esc(s)+'">'+esc(STATUS[s]||s)+'</span>'}
-function friendly(err){const m=String((err&&err.message)||err||"");if(/Invalid login credentials/i.test(m))return "Correo o contraseña incorrectos.";if(/Email not confirmed/i.test(m))return "Confirma tu correo antes de entrar.";if(/provider is not enabled|Unsupported provider/i.test(m))return "El acceso con Google todavía no está activado.";if(/Failed to fetch/i.test(m))return "No hay conexión con el servidor.";return "Error: "+esc(m)}
-function person(b){return b.profiles||{}}
+function fmt(ts){return ts?new Date(ts).toLocaleString("es-MX",{day:"numeric",month:"short",year:"numeric",hour:"numeric",minute:"2-digit"}):"—"}
+function friendly(err){const m=String((err&&err.message)||err||"");if(/Invalid login credentials/i.test(m))return "Correo o contraseña incorrectos.";if(/Email not confirmed/i.test(m))return "Confirma tu correo antes de entrar.";if(/provider is not enabled|Unsupported provider/i.test(m))return "El acceso con Google todavía no está activado.";if(/not authorized/i.test(m))return "Tu cuenta no tiene permiso de administrador.";if(/Failed to fetch/i.test(m))return "No hay conexión con el servidor.";return "Error: "+esc(m)}
+function method(u){return u.provider==="google"?'<span class="tag google">Google</span>':'<span class="tag">Correo</span>'}
+function tags(u){return method(u)+(u.is_admin?'<span class="tag admin">Admin</span>':'')+(u.provider!=="google"&&!u.email_confirmed_at?'<span class="tag warn">Correo sin confirmar</span>':'')}
 
 /* ---------------- Vistas ---------------- */
 function render(){
- if(!sb){app.innerHTML='<main><div class="card login"><h1>Portal de admin</h1><p class="sub">ECOBAJATOURS</p><div class="alert warn">El sistema todavía no está conectado a la base de datos. Falta completar <code>js/ecoba-config.js</code> con la URL y la clave publicable de Supabase.</div></div></main>';return}
+ if(!sb){app.innerHTML='<main><div class="card login"><h1>Admin de usuarios</h1><p class="sub">ECOBAJATOURS</p><div class="alert warn">El sistema todavía no está conectado. Falta completar <code>js/ecoba-config.js</code> con la URL y la clave publicable de Supabase.</div></div></main>';return}
  if(!session){renderLogin();return}
  if(isAdmin===null){app.innerHTML=topbar()+'<main><p class="sub">Verificando acceso…</p></main>';return}
  if(!isAdmin){app.innerHTML=topbar()+'<main><div class="card login"><h1>Sin acceso</h1><p class="sub">La cuenta <b>'+esc(session.user.email)+'</b> no es administradora.</p><div class="alert warn">Pide a un administrador que agregue tu cuenta a la tabla <code>admins</code> en Supabase.</div><button class="btn btn-ghost" data-act="logout" style="margin-top:16px;width:100%">Cerrar sesión</button></div></main>';return}
- const body=!loaded?'<p class="sub">Cargando datos…</p>':loadError?'<div class="alert error">'+loadError+'</div>':tab==="usuarios"?usersView():tab==="resumen"?summaryView():bookingsView();
- app.innerHTML=topbar()+'<main>'+body+'</main>'+(openId?drawer():"");
+ app.innerHTML=topbar()+'<main>'+(!loaded?'<p class="sub">Cargando usuarios…</p>':loadError?'<div class="alert error">'+loadError+'</div>':usersView())+'</main>'+(openId?drawer():"");
 }
-function topbar(){const nav=isAdmin?'<nav class="tabs" aria-label="Secciones">'+[["reservas","Reservas"],["usuarios","Usuarios"],["resumen","Resumen"]].map(([k,l])=>'<button data-tab="'+k+'"'+(tab===k?' aria-current="page"':'')+'>'+l+'</button>').join("")+'</nav>':'';
- return '<header class="top"><div class="topin"><div class="logo">ECO<b>BAJA</b>TOURS<small>PORTAL DE ADMIN</small></div>'+nav+'<div class="who"><span>'+esc(session?session.user.email:"")+'</span>'+(isAdmin?'<button class="btn btn-ghost" data-act="reload" title="Actualizar datos">↻ Actualizar</button>':'')+'<button class="btn btn-ghost" data-act="logout">Salir</button></div></div></header>'}
-function renderLogin(){app.innerHTML='<main><form class="card login" id="loginForm" novalidate><div class="logo" style="color:var(--navy)">ECO<b style="color:#d99a00">BAJA</b>TOURS</div><h1 style="margin-top:14px">Portal de admin</h1><p class="sub">Entra con tu cuenta de administrador.</p><button type="button" class="google" data-act="google">'+googleIcon+'Continuar con Google</button><div class="or">o con tu correo</div><label>Correo<input id="lg-email" type="email" autocomplete="email" required></label><label>Contraseña<input id="lg-pass" type="password" autocomplete="current-password" required></label>'+(loginMsg?'<div class="alert error" role="alert">'+loginMsg+'</div>':'')+'<button class="btn btn-primary" type="submit" id="lg-submit">Entrar →</button></form></main>'}
+function topbar(){return '<header class="top"><div class="topin"><div class="logo">ECO<b>BAJA</b>TOURS<small>ADMIN DE USUARIOS</small></div><div class="who"><span>'+esc(session?session.user.email:"")+'</span>'+(isAdmin?'<button class="btn btn-ghost" data-act="reload">↻ Actualizar</button>':'')+'<button class="btn btn-ghost" data-act="logout">Salir</button></div></div></header>'}
+function renderLogin(){app.innerHTML='<main><form class="card login" id="loginForm" novalidate><div class="logo" style="color:var(--navy)">ECO<b style="color:#d99a00">BAJA</b>TOURS</div><h1 style="margin-top:14px">Admin de usuarios</h1><p class="sub">Entra con tu cuenta de administrador.</p><button type="button" class="google" data-act="google">'+googleIcon+'Continuar con Google</button><div class="or">o con tu correo</div><label>Correo<input id="lg-email" type="email" autocomplete="email" required></label><label>Contraseña<input id="lg-pass" type="password" autocomplete="current-password" required></label>'+(loginMsg?'<div class="alert error" role="alert">'+loginMsg+'</div>':'')+'<button class="btn btn-primary" type="submit" id="lg-submit">Entrar →</button></form></main>'}
 
-function filteredBookings(){const q=filters.q.trim().toLowerCase();return bookings.filter(b=>{
- if(filters.user&&b.user_id!==filters.user)return false;
- if(filters.status==="active"&&(b.status==="cancelled"||b.status==="completed"))return false;
- if(filters.status!=="active"&&filters.status!=="all"&&b.status!==filters.status)return false;
- if(filters.from&&b.arrival_date<filters.from)return false;
- if(filters.to&&b.arrival_date>filters.to)return false;
- if(q){const p=person(b),hay=[b.code,b.arrival_flight,b.return_flight,b.destination,p.full_name,p.email,p.phone].join(" ").toLowerCase();if(!hay.includes(q))return false}
- return true})}
-function bookingsView(){const rows=filteredBookings(),u=filters.user?profiles.find(p=>p.id===filters.user):null;
- return '<h1>Reservas</h1><p class="sub">Solicitudes que llegan del formulario "Reserva tu traslado". Abre una para confirmarla y asignar la hora de recogida.</p><div class="card"><div class="toolbar">'+
- '<label class="grow">Buscar<input id="f-q" type="search" placeholder="Código, cliente, correo, vuelo o destino" value="'+esc(filters.q)+'"></label>'+
- '<label>Estado<select id="f-status">'+[["active","Activas (pendientes y confirmadas)"],["pending","Pendientes"],["confirmed","Confirmadas"],["completed","Completadas"],["cancelled","Canceladas"],["all","Todas"]].map(([v,l])=>'<option value="'+v+'"'+(filters.status===v?" selected":"")+'>'+l+'</option>').join("")+'</select></label>'+
- '<label>Llegada desde<input id="f-from" type="date" value="'+esc(filters.from)+'"></label><label>Hasta<input id="f-to" type="date" value="'+esc(filters.to)+'"></label>'+
- '<div class="right"><button class="btn btn-ghost" data-act="clear">Limpiar</button><button class="btn btn-ghost" data-act="csv">Exportar CSV</button></div></div>'+
- (u?'<div class="count">Mostrando reservas de <b>'+esc(u.full_name||u.email)+'</b> · <button class="btn btn-ghost" data-act="clearuser" style="min-height:30px;padding:4px 10px">Ver todas</button></div>':'')+
- (rows.length?'<div class="tablewrap"><table><thead><tr><th>Código</th><th>Cliente</th><th>Llegada</th><th>Regreso</th><th>Destino</th><th>Transporte</th><th>Recogida</th><th>Estado</th><th>Recibida</th></tr></thead><tbody>'+rows.map(b=>{const p=person(b);return '<tr tabindex="0" data-open="'+esc(b.id)+'"><td class="mono">'+esc(b.code)+'</td><td><b>'+esc(p.full_name||"Sin nombre")+'</b><div class="muted">'+esc(p.email||"")+'</div></td><td>'+esc(b.arrival_flight)+'<div class="muted">'+fmtDate(b.arrival_date)+'</div></td><td>'+(b.return_flight||b.return_date?esc(b.return_flight||"—")+'<div class="muted">'+fmtDate(b.return_date)+'</div>':'<span class="muted">—</span>')+'</td><td>'+esc(b.destination)+'</td><td>'+esc(VEHICLE[b.vehicle_type]||b.vehicle_type)+'<div class="muted">'+b.passengers+' pax</div></td><td>'+(b.pickup_at?fmtDT(b.pickup_at):'<span class="muted">Sin asignar</span>')+'</td><td>'+badge(b.status)+'</td><td class="muted">'+fmtCreated(b.created_at)+'</td></tr>'}).join("")+'</tbody></table></div><div class="count">'+rows.length+' de '+bookings.length+' reservas</div>':'<div class="empty">No hay reservas con estos filtros.</div>')+'</div>'}
-function usersView(){const counts={};bookings.forEach(b=>{counts[b.user_id]=(counts[b.user_id]||0)+1});
- return '<h1>Usuarios registrados</h1><p class="sub">Clientes con cuenta en el sitio. Haz clic en uno para ver sus reservas.</p><div class="card">'+(profiles.length?'<div class="tablewrap"><table><thead><tr><th>Nombre</th><th>Correo</th><th>Teléfono</th><th>Reservas</th><th>Registrado</th></tr></thead><tbody>'+profiles.map(p=>'<tr tabindex="0" data-user="'+esc(p.id)+'"><td><b>'+esc(p.full_name||"Sin nombre")+'</b></td><td>'+esc(p.email||"")+'</td><td>'+esc(p.phone||"—")+'</td><td>'+(counts[p.id]||0)+'</td><td class="muted">'+fmtCreated(p.created_at)+'</td></tr>').join("")+'</tbody></table></div><div class="count">'+profiles.length+' usuarios</div>':'<div class="empty">Todavía no hay usuarios registrados.</div>')+'</div>'}
-function summaryView(){const t=today(),week=addDays(t,7),by=s=>bookings.filter(b=>b.status===s).length;
- const upcoming=bookings.filter(b=>b.arrival_date>=t&&b.arrival_date<=week&&b.status!=="cancelled").sort((a,b)=>a.arrival_date<b.arrival_date?-1:1);
- const noPickup=bookings.filter(b=>b.status==="confirmed"&&!b.pickup_at&&b.arrival_date>=t);
- const recent=bookings.slice().sort((a,b)=>a.created_at<b.created_at?1:-1).slice(0,8);
- const li=b=>{const p=person(b);return '<li data-open="'+esc(b.id)+'"><div><b>'+esc(p.full_name||p.email||"Cliente")+'</b><div class="muted">'+esc(b.arrival_flight)+' · '+fmtDate(b.arrival_date)+' · '+esc(b.destination)+'</div></div><div>'+badge(b.status)+'</div></li>'};
- return '<h1>Resumen</h1><p class="sub">Lo que necesita atención hoy.</p><div class="stats">'+[["Pendientes de confirmar",by("pending"),"warn"],["Confirmadas",by("confirmed"),""],["Llegadas próximos 7 días",upcoming.length,""],["Reservas totales",bookings.length,""],["Usuarios registrados",profiles.length,""]].map(([l,n,c])=>'<div class="card stat '+c+'"><strong>'+n+'</strong><span>'+l+'</span></div>').join("")+'</div>'+
- '<div class="split"><div class="card"><div class="cardhead"><h2>Llegadas de los próximos 7 días</h2></div>'+(upcoming.length?'<ul class="list">'+upcoming.map(li).join("")+'</ul>':'<div class="empty">Sin llegadas esta semana.</div>')+'</div>'+
- '<div><div class="card" style="margin-bottom:18px"><div class="cardhead"><h2>Confirmadas sin hora de recogida</h2></div>'+(noPickup.length?'<ul class="list">'+noPickup.map(li).join("")+'</ul>':'<div class="empty">Todo tiene hora asignada.</div>')+'</div>'+
- '<div class="card"><div class="cardhead"><h2>Últimas solicitudes</h2></div>'+(recent.length?'<ul class="list">'+recent.map(li).join("")+'</ul>':'<div class="empty">Aún no llegan reservas.</div>')+'</div></div></div>'}
+function filtered(){const q=filters.q.trim().toLowerCase();return users.filter(u=>{
+ if(filters.method==="google"&&u.provider!=="google")return false;
+ if(filters.method==="email"&&u.provider==="google")return false;
+ if(filters.method==="admin"&&!u.is_admin)return false;
+ if(q&&![u.full_name,u.email,u.phone].join(" ").toLowerCase().includes(q))return false;return true})}
+function usersView(){const rows=filtered(),week=Date.now()-7*864e5,g=users.filter(u=>u.provider==="google").length;
+ return '<h1>Usuarios registrados</h1><p class="sub">Clientes que crearon su cuenta en el sitio, con correo o con Google. Las reservas se gestionan en su sistema de reservas.</p>'+
+ '<div class="stats">'+[["Usuarios",users.length],["Nuevos últimos 7 días",users.filter(u=>new Date(u.created_at).getTime()>=week).length],["Con Google",g],["Con correo",users.length-g]].map(([l,n])=>'<div class="card stat"><strong>'+n+'</strong><span>'+l+'</span></div>').join("")+'</div>'+
+ '<div class="card"><div class="toolbar"><label class="grow">Buscar<input id="f-q" type="search" placeholder="Nombre, correo o teléfono" value="'+esc(filters.q)+'"></label>'+
+ '<label>Acceso<select id="f-method">'+[["all","Todos"],["email","Correo"],["google","Google"],["admin","Administradores"]].map(([v,l])=>'<option value="'+v+'"'+(filters.method===v?" selected":"")+'>'+l+'</option>').join("")+'</select></label>'+
+ '<div class="right"><button class="btn btn-ghost" data-act="csv">Exportar CSV</button></div></div>'+
+ (rows.length?'<div class="tablewrap"><table><thead><tr><th>Nombre</th><th>Correo</th><th>Teléfono</th><th>Acceso</th><th>Registrado</th><th>Último acceso</th></tr></thead><tbody>'+rows.map(u=>'<tr tabindex="0" data-open="'+esc(u.id)+'"><td><b>'+esc(u.full_name||"Sin nombre")+'</b></td><td>'+esc(u.email||"")+'</td><td>'+esc(u.phone||"—")+'</td><td>'+tags(u)+'</td><td class="muted">'+fmt(u.created_at)+'</td><td class="muted">'+fmt(u.last_sign_in_at)+'</td></tr>').join("")+'</tbody></table></div><div class="count">'+rows.length+' de '+users.length+' usuarios</div>':'<div class="empty">'+(users.length?"Ningún usuario coincide con la búsqueda.":"Todavía no hay usuarios registrados.")+'</div>')+'</div>'}
 
-function drawer(){const b=bookings.find(x=>x.id===openId);if(!b)return "";const p=person(b),dt=v=>v?String(v).slice(0,16).replace(" ","T"):"";
- return '<div class="scrim" data-act="close"></div><aside class="drawer" role="dialog" aria-modal="true" aria-labelledby="dr-title"><header><div><span class="mono">'+esc(b.code)+'</span><h2 id="dr-title">SJD → '+esc(b.destination)+'</h2><div style="margin-top:6px">'+badge(b.status)+'</div></div><button class="close" data-act="close" aria-label="Cerrar">×</button></header><div class="body">'+
- '<div class="section-title">Cliente</div><dl class="facts"><dt>Nombre</dt><dd>'+esc(p.full_name||"Sin nombre")+'</dd><dt>Correo</dt><dd>'+(p.email?'<a href="mailto:'+esc(p.email)+'">'+esc(p.email)+'</a>':'—')+'</dd><dt>Teléfono</dt><dd>'+(p.phone?'<a href="https://wa.me/'+esc(String(p.phone).replace(/\D/g,""))+'" target="_blank" rel="noopener noreferrer">'+esc(p.phone)+'</a>':'—')+'</dd><dt>Idioma</dt><dd>'+(b.locale==="en"?"Inglés":"Español")+'</dd></dl>'+
- '<div class="section-title">Viaje</div><dl class="facts"><dt>Vuelo de llegada</dt><dd><b>'+esc(b.arrival_flight)+'</b> · '+fmtDate(b.arrival_date)+'</dd><dt>Vuelo de regreso</dt><dd>'+(b.return_flight||b.return_date?esc(b.return_flight||"—")+' · '+fmtDate(b.return_date):'—')+'</dd><dt>Transporte</dt><dd>'+esc(VEHICLE[b.vehicle_type]||b.vehicle_type)+' · '+b.passengers+' personas</dd><dt>Recibida</dt><dd>'+fmtCreated(b.created_at)+'</dd></dl>'+
- '<form class="form" id="editForm" novalidate><div class="section-title wide" style="margin:6px 0 0">Gestión</div>'+
- '<label>Estado<select id="e-status">'+Object.keys(STATUS).map(k=>'<option value="'+k+'"'+(b.status===k?" selected":"")+'>'+STATUS[k]+'</option>').join("")+'</select></label>'+
- '<label>Recogida de llegada<input id="e-pickup" type="datetime-local" value="'+esc(dt(b.pickup_at))+'"><span class="hint">Hora de Los Cabos</span></label>'+
- '<label>Recogida de regreso<input id="e-rpickup" type="datetime-local" value="'+esc(dt(b.return_pickup_at))+'"'+(b.return_flight||b.return_date?'':' disabled')+'><span class="hint">'+(b.return_flight||b.return_date?'Hora de Los Cabos':'Sin vuelo de regreso')+'</span></label>'+
- '<label>Tarifa MXN<input id="e-mxn" type="number" min="0" step="1" value="'+esc(b.estimated_mxn==null?"":Number(b.estimated_mxn))+'"></label>'+
- '<label>Tarifa USD<input id="e-usd" type="number" min="0" step="1" value="'+esc(b.estimated_usd==null?"":Number(b.estimated_usd))+'"></label>'+
- '<label class="wide">Mensaje para el cliente<textarea id="e-msg" maxlength="600" placeholder="Ej.: Tu chofer te espera en la salida de la Terminal 2 con un letrero ECOBAJATOURS.">'+esc(b.customer_message||"")+'</textarea><span class="hint">El cliente lo ve en Mi cuenta.</span></label>'+
- '<label class="wide">Notas internas<textarea id="e-notes" maxlength="2000" placeholder="'+(notesLoading?"Cargando…":"Solo las ve el equipo.")+'"'+(notesLoading?" disabled":"")+'>'+esc(openNotes)+'</textarea><span class="hint">Nunca se muestran al cliente.</span></label></form></div>'+
- '<footer><span class="msg" id="e-feedback" role="status"></span>'+(b.status==="pending"?'<button class="btn btn-ok" data-act="confirm"'+(saving?" disabled":"")+'>Confirmar y guardar</button>':'')+'<button class="btn btn-primary" data-act="save"'+(saving?" disabled":"")+'>Guardar cambios</button></footer></aside>'}
+function drawer(){const u=users.find(x=>x.id===openId);if(!u)return "";const wa=String(u.phone||"").replace(/\D/g,"");
+ return '<div class="scrim" data-act="close"></div><aside class="drawer" role="dialog" aria-modal="true" aria-labelledby="dr-title"><header><div><h2 id="dr-title">'+esc(u.full_name||"Sin nombre")+'</h2>'+tags(u)+'</div><button class="close" data-act="close" aria-label="Cerrar">×</button></header><div class="body">'+
+ '<div class="section-title">Cuenta</div><dl class="facts"><dt>Correo</dt><dd><a href="mailto:'+esc(u.email)+'">'+esc(u.email)+'</a></dd><dt>Teléfono</dt><dd>'+(wa?'<a href="https://wa.me/'+esc(wa)+'" target="_blank" rel="noopener noreferrer">'+esc(u.phone)+'</a>':'—')+'</dd><dt>Acceso con</dt><dd>'+(u.provider==="google"?"Google":"Correo y contraseña")+'</dd><dt>Correo confirmado</dt><dd>'+(u.email_confirmed_at?fmt(u.email_confirmed_at):"No")+'</dd><dt>Registrado</dt><dd>'+fmt(u.created_at)+'</dd><dt>Último acceso</dt><dd>'+fmt(u.last_sign_in_at)+'</dd><dt>ID</dt><dd class="muted">'+esc(u.id)+'</dd></dl>'+
+ '<form class="form" id="editForm" novalidate><div class="section-title" style="margin:6px 0 0">Editar datos</div><label>Nombre completo<input id="e-name" maxlength="80" value="'+esc(u.full_name||"")+'"></label><label>WhatsApp / teléfono<input id="e-phone" type="tel" maxlength="25" value="'+esc(u.phone||"")+'"></label></form>'+
+ '<p class="hint">El correo y la contraseña los cambia el propio cliente. Para eliminar una cuenta o restablecer su acceso usa Supabase → Authentication → Users.</p></div>'+
+ '<footer><span class="msg" id="e-feedback" role="status"></span><button class="btn btn-primary" data-act="save"'+(saving?" disabled":"")+'>Guardar cambios</button></footer></aside>'}
 
 /* ---------------- Datos ---------------- */
-async function checkAdmin(){isAdmin=null;render();const r=await sb.from("admins").select("user_id").eq("user_id",session.user.id).maybeSingle();isAdmin=!r.error&&!!r.data;if(isAdmin)await loadAll();else render()}
-async function loadAll(){loaded=false;loadError="";render();
- const [b,p]=await Promise.all([sb.from("bookings").select("*,profiles(full_name,email,phone)").order("arrival_date",{ascending:true}),sb.from("profiles").select("*").order("created_at",{ascending:false})]);
- if(b.error||p.error)loadError=friendly(b.error||p.error);else{bookings=b.data||[];profiles=p.data||[]}
- loaded=true;render()}
-async function openBooking(id){openId=id;openNotes="";notesLoading=true;render();
- const r=await sb.from("booking_internal_notes").select("notes").eq("booking_id",id).maybeSingle();
- if(openId!==id)return;notesLoading=false;openNotes=(r.data&&r.data.notes)||"";const ta=document.getElementById("e-notes");if(ta){ta.disabled=false;ta.value=openNotes;ta.placeholder="Solo las ve el equipo."}}
-function numOrNull(id){const v=document.getElementById(id).value.trim();return v===""?null:Number(v)}
-function dtOrNull(id){const el=document.getElementById(id);return el&&!el.disabled&&el.value?el.value+":00":null}
-async function saveBooking(confirmIt){const b=bookings.find(x=>x.id===openId);if(!b)return;const fb=document.getElementById("e-feedback");
- const patch={status:confirmIt?"confirmed":document.getElementById("e-status").value,pickup_at:dtOrNull("e-pickup"),return_pickup_at:dtOrNull("e-rpickup"),estimated_mxn:numOrNull("e-mxn"),estimated_usd:numOrNull("e-usd"),customer_message:document.getElementById("e-msg").value.trim()||null};
- if(patch.status==="confirmed"&&!patch.pickup_at){fb.className="msg error";fb.textContent="Asigna la hora de recogida antes de confirmar.";document.getElementById("e-pickup").focus();return}
- const notes=document.getElementById("e-notes").value.trim();
- saving=true;document.querySelectorAll(".drawer footer .btn").forEach(x=>x.disabled=true);fb.className="msg";fb.textContent="Guardando…";
- const r=await sb.from("bookings").update(patch).eq("id",b.id).select("*,profiles(full_name,email,phone)").single();
- let nErr=null;if(!r.error&&!notesLoading&&notes!==openNotes){const n=await sb.from("booking_internal_notes").upsert({booking_id:b.id,notes:notes||null,updated_by:session.user.id,updated_at:new Date().toISOString()});nErr=n.error;if(!nErr)openNotes=notes}
- saving=false;
- if(r.error||nErr){document.querySelectorAll(".drawer footer .btn").forEach(x=>x.disabled=false);fb.className="msg error";fb.textContent=friendly(r.error||nErr).replace(/<[^>]+>/g,"");return}
- Object.assign(b,r.data);render();const fb2=document.getElementById("e-feedback");if(fb2){fb2.className="msg ok";fb2.textContent="Guardado ✓"}}
-function exportCsv(){const rows=filteredBookings(),cols=[["Código",b=>b.code],["Estado",b=>STATUS[b.status]||b.status],["Cliente",b=>person(b).full_name],["Correo",b=>person(b).email],["Teléfono",b=>person(b).phone],["Vuelo llegada",b=>b.arrival_flight],["Fecha llegada",b=>b.arrival_date],["Vuelo regreso",b=>b.return_flight],["Fecha regreso",b=>b.return_date],["Destino",b=>b.destination],["Transporte",b=>VEHICLE[b.vehicle_type]||b.vehicle_type],["Personas",b=>b.passengers],["Recogida llegada",b=>b.pickup_at],["Recogida regreso",b=>b.return_pickup_at],["Tarifa MXN",b=>b.estimated_mxn],["Tarifa USD",b=>b.estimated_usd],["Mensaje al cliente",b=>b.customer_message],["Recibida",b=>b.created_at]];
+async function checkAdmin(){isAdmin=null;render();const r=await sb.from("admins").select("user_id").eq("user_id",session.user.id).maybeSingle();isAdmin=!r.error&&!!r.data;if(isAdmin)await loadUsers();else render()}
+async function loadUsers(){loaded=false;loadError="";render();const r=await sb.rpc("admin_list_users");if(r.error)loadError=friendly(r.error);else users=r.data||[];loaded=true;render()}
+async function saveUser(){const u=users.find(x=>x.id===openId);if(!u)return;const fb=document.getElementById("e-feedback"),name=document.getElementById("e-name").value.trim(),phone=document.getElementById("e-phone").value.trim();
+ saving=true;document.querySelector('[data-act="save"]').disabled=true;fb.className="msg";fb.textContent="Guardando…";
+ const r=await sb.from("profiles").update({full_name:name||null,phone:phone||null}).eq("id",u.id);saving=false;
+ if(r.error){document.querySelector('[data-act="save"]').disabled=false;fb.className="msg error";fb.textContent=friendly(r.error).replace(/<[^>]+>/g,"");return}
+ u.full_name=name||null;u.phone=phone||null;render();const f2=document.getElementById("e-feedback");if(f2){f2.className="msg ok";f2.textContent="Guardado ✓"}}
+function exportCsv(){const rows=filtered(),cols=[["Nombre",u=>u.full_name],["Correo",u=>u.email],["Teléfono",u=>u.phone],["Acceso",u=>u.provider==="google"?"Google":"Correo"],["Correo confirmado",u=>u.email_confirmed_at?"Sí":"No"],["Admin",u=>u.is_admin?"Sí":"No"],["Registrado",u=>u.created_at],["Último acceso",u=>u.last_sign_in_at]];
  const cell=v=>{let s=v==null?"":String(v);if(/^[=+\-@]/.test(s))s="'"+s;return '"'+s.replace(/"/g,'""')+'"'};
- const csv="﻿"+[cols.map(c=>cell(c[0])).join(",")].concat(rows.map(b=>cols.map(c=>cell(c[1](b))).join(","))).join("\r\n");
- const a=document.createElement("a");a.href=URL.createObjectURL(new Blob([csv],{type:"text/csv;charset=utf-8"}));a.download="reservas-ecobajatours-"+today()+".csv";document.body.appendChild(a);a.click();setTimeout(()=>{URL.revokeObjectURL(a.href);a.remove()},500)}
+ const csv="﻿"+[cols.map(c=>cell(c[0])).join(",")].concat(rows.map(u=>cols.map(c=>cell(c[1](u))).join(","))).join("\r\n");
+ const a=document.createElement("a");a.href=URL.createObjectURL(new Blob([csv],{type:"text/csv;charset=utf-8"}));a.download="usuarios-ecobajatours.csv";document.body.appendChild(a);a.click();setTimeout(()=>{URL.revokeObjectURL(a.href);a.remove()},500)}
 
 /* ---------------- Eventos ---------------- */
 document.addEventListener("click",e=>{
- const tb=e.target.closest("[data-tab]");if(tb){tab=tb.dataset.tab;openId=null;history.replaceState(null,"","#"+tab);render();return}
- const op=e.target.closest("[data-open]");if(op){openBooking(op.dataset.open);return}
- const us=e.target.closest("[data-user]");if(us){filters.user=us.dataset.user;filters.status="all";tab="reservas";history.replaceState(null,"","#reservas");render();return}
+ const op=e.target.closest("[data-open]");if(op){openId=op.dataset.open;render();return}
  const ac=e.target.closest("[data-act]");if(!ac)return;const a=ac.dataset.act;
  if(a==="close"){openId=null;render()}
- else if(a==="save")saveBooking(false);
- else if(a==="confirm")saveBooking(true);
- else if(a==="reload")loadAll();
+ else if(a==="save")saveUser();
+ else if(a==="reload")loadUsers();
  else if(a==="csv")exportCsv();
- else if(a==="clear"){filters.q="";filters.status="active";filters.from="";filters.to="";filters.user="";render()}
- else if(a==="clearuser"){filters.user="";render()}
- else if(a==="logout"){sb.auth.signOut()}
- else if(a==="google"){sb.auth.signInWithOAuth({provider:"google",options:{redirectTo:location.origin+location.pathname}}).then(r=>{if(r.error){loginMsg=friendly(r.error);render()}})}
+ else if(a==="logout")sb.auth.signOut();
+ else if(a==="google")sb.auth.signInWithOAuth({provider:"google",options:{redirectTo:location.origin+location.pathname}}).then(r=>{if(r.error){loginMsg=friendly(r.error);render()}});
 });
-document.addEventListener("keydown",e=>{if(e.key==="Escape"&&openId){openId=null;render();return}if(e.key==="Enter"&&e.target.matches("tr[data-open],tr[data-user]")){e.target.click()}});
+document.addEventListener("keydown",e=>{if(e.key==="Escape"&&openId){openId=null;render();return}if(e.key==="Enter"&&e.target.matches("tr[data-open]"))e.target.click()});
 document.addEventListener("input",e=>{if(e.target.id==="f-q"){filters.q=e.target.value;const pos=e.target.selectionStart;render();const el=document.getElementById("f-q");if(el){el.focus();el.setSelectionRange(pos,pos)}}});
-document.addEventListener("change",e=>{const m={"f-status":"status","f-from":"from","f-to":"to"}[e.target.id];if(m){filters[m]=e.target.value;render()}});
-document.addEventListener("submit",async e=>{if(e.target.id!=="loginForm")return;e.preventDefault();const email=document.getElementById("lg-email").value.trim(),pw=document.getElementById("lg-pass").value,btn=document.getElementById("lg-submit");
+document.addEventListener("change",e=>{if(e.target.id==="f-method"){filters.method=e.target.value;render()}});
+document.addEventListener("submit",async e=>{if(e.target.id==="editForm"){e.preventDefault();saveUser();return}if(e.target.id!=="loginForm")return;e.preventDefault();const email=document.getElementById("lg-email").value.trim(),pw=document.getElementById("lg-pass").value,btn=document.getElementById("lg-submit");
  if(!email||!pw){loginMsg="Escribe tu correo y tu contraseña.";render();return}
  btn.disabled=true;const r=await sb.auth.signInWithPassword({email,password:pw});if(r.error){loginMsg=friendly(r.error);render()}});
 
-const h=location.hash.replace("#","");if(["reservas","usuarios","resumen"].includes(h))tab=h;
 if(sb){sb.auth.onAuthStateChange((ev,s)=>{const prev=session&&session.user.id;session=s;
-  if(/[?&](code|error)=/.test(location.search))history.replaceState(null,"",location.pathname+location.hash);
-  setTimeout(()=>{if(!s){isAdmin=null;bookings=[];profiles=[];loaded=false;openId=null;render();return}if(s.user.id!==prev){loginMsg="";checkAdmin()}},0)})}
+  if(/[?&](code|error)=/.test(location.search))history.replaceState(null,"",location.pathname);
+  setTimeout(()=>{if(!s){isAdmin=null;users=[];loaded=false;openId=null;render();return}if(s.user.id!==prev){loginMsg="";checkAdmin()}},0)})}
 render();
 })();
 </script>
